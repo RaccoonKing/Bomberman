@@ -8,7 +8,7 @@ public:
 	~Sprite();
 	SDL_Texture* GetTexture();
 	SDL_Rect* GetRegion();
-private:
+protected:
 	SDL_Texture* m_pxTexture;
 	SDL_Rect m_xRegion;
 };

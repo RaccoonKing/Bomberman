@@ -34,13 +34,14 @@ bool DrawManager::Initialize(int p_iWidht, int p_iHeight)
 	// If the returned pointer is a nullptr something has gone wrong and we must quit.
 	if (m_pxRenderer == nullptr)
 	{
+		printf("Could not create window: %s\n", SDL_GetError());
 		return false;
 	}
 
 	// Sets the drawcolor which in our project will only affect the color we use when clearing the screen, unlike the earlier program Pong we
 	// now draw Textures which allready have their own defined color for each pixel.
 	SDL_SetRenderDrawColor(m_pxRenderer, 
-		0x11, 0x12, 0x13, 0xff);
+		0x00, 0x00, 0x00, 0xff);
 	
 	return true;
 
@@ -75,6 +76,13 @@ void DrawManager::Draw(Sprite* p_pxSprite, int p_iX, int p_iY)
 	// of the Sprites SDL_Texture to the correct destination we created earlier.
 	SDL_RenderCopy(m_pxRenderer, p_pxSprite->GetTexture(),
 		p_pxSprite->GetRegion(), &rect);
+}
+
+void DrawManager::DebugDraw(int p_iX, int p_iY, int p_iW, int p_iH)
+{
+	SDL_Rect rect = { p_iX, p_iY, p_iW, p_iH };
+	SDL_RenderDrawRect(m_pxRenderer, &rect);
+
 }
 
 SDL_Renderer* DrawManager::GetRenderer()

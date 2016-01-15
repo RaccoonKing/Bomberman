@@ -49,11 +49,15 @@ bool Engine::Initialize()
 
 	m_pxStateManager = new StateManager();
 
+	m_pxInputManager = new InputManager();
+
+
 	System system;
 	system.m_iScreenWidth = SCREENWIDTH;
 	system.m_iScreenHeight = SCREEHEIGHT;
 	system.m_pxDrawManager = m_pxDrawManager;
 	system.m_pxSpriteManager = m_pxSpriteManager;
+	system.m_pxInputManager = m_pxInputManager;
 
 	m_pxStateManager->SetState(new GameState(system));
 
@@ -112,17 +116,10 @@ void Engine::Update()
 
 void Engine::HandleEvents()
 {
-	SDL_Event xEvent;    
+	m_pxInputManager->HandleKeyEvents();
 
-	while (SDL_PollEvent(&xEvent))   
+	if (m_pxInputManager->CheckQuit())
 	{
-		if (xEvent.type == SDL_QUIT)
-		{
-			m_bRunning = false;
-		}
-		else
-		{
-			m_pxInputManager->HandleKeyEvents();
-		}
+		m_bRunning = false;
 	}
 }

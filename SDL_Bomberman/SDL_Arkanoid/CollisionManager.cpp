@@ -31,6 +31,7 @@ bool CollisionManager::Check(Collider* p_pxLeft, Collider* p_pxRight,
 				p_iOverlapY = iDeltaY;
 				if (iCenterDeltaY < 0)
 					p_iOverlapY = -p_iOverlapY;
+				
 			}
 			else if (iDeltaY > iDeltaX)
 			{

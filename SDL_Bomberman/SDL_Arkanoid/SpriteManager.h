@@ -1,6 +1,7 @@
 #pragma once
 
 class Sprite;
+class AnimatedSprite;
 
 class SpriteManager
 {
@@ -9,6 +10,7 @@ public:
 	~SpriteManager();
 
 	Sprite* CreateSprite(const std::string& p_sFilepath, int p_iX, int p_iY, int p_iW, int p_iH);
+	AnimatedSprite* CreateAnimatedSprite(const std::string& p_sFilepath);
 	void DestroySprite(Sprite* p_xSprite);
 
 private:

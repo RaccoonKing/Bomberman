@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "SpriteManager.h"
 #include "Sprite.h"
-
+#include "AnimatedSprite.h"
 
 SpriteManager::SpriteManager(SDL_Renderer* p_pxRenderer)
 {
@@ -79,4 +79,24 @@ void SpriteManager::DestroySprite(Sprite* p_xSprite)
 		}
 		it++;
 	}
+}
+
+AnimatedSprite* SpriteManager::CreateAnimatedSprite(const std::string& p_sFilepath)
+{
+	// First we try to find the texture in our std::map
+	auto it = m_apxTextures.find(p_sFilepath);
+	if (it == m_apxTextures.end())
+	{
+		// If we do not find the texture we need to load it and inser it in to our std::map so
+		// that we may create pointers to the same texture for several sprites.
+		SDL_Surface* xSurface = SDL_LoadBMP(p_sFilepath.c_str());
+		SDL_Texture* xTexture = SDL_CreateTextureFromSurface(m_pxRenderer, xSurface);
+		SDL_FreeSurface(xSurface);
+		m_apxTextures.insert(std::pair<std::string, SDL_Texture*>(p_sFilepath, xTexture));
+		it = m_apxTextures.find(p_sFilepath);
+	}
+
+	AnimatedSprite* xSprite = new AnimatedSprite(it->second);
+	m_apxSprites.push_back(xSprite);
+	return xSprite;
 }

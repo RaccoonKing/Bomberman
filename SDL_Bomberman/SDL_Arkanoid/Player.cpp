@@ -25,8 +25,9 @@ Player::~Player()
 
 void Player::Update(float p_fDeltaTime)
 {
-	m_fX += m_pxInputManager->GetSpeedX();
-	m_fY += m_pxInputManager->GetSpeedY();
+	m_fX = m_fX + m_pxInputManager->GetSpeedX();
+	m_fY = m_fY + m_pxInputManager->GetSpeedY();
+	m_pxCollider->Refresh();
 }
 
 Sprite * Player::GetSprite()
@@ -44,5 +45,21 @@ float Player::GetX() { return m_fX; }
 float Player::GetY() { return m_fY; }
 
 bool Player::IsVisible() { return m_bVisible; }
+
+int Player::GetSpeedX()
+{
+	return m_pxInputManager->GetSpeedX();
+}
+
+int Player::GetSpeedY()
+{
+	return m_pxInputManager->GetSpeedY();
+}
+
+void Player::SetPosition(float p_fX, float p_fY)
+{
+	m_fX = p_fX;
+	m_fY = p_fY;
+}
 
 EENTITYTYPE Player::GetType() { return EENTITYTYPE::ENTITY_PlAYER; }

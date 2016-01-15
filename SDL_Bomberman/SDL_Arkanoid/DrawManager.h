@@ -17,7 +17,7 @@ public:
 	void Clear();
 	void Present();
 	void Draw(Sprite* p_pxSprite, int p_iX, int p_iY);
-
+	void DebugDraw(int p_iX, int p_iY, int p_iW, int p_iH);
 	SDL_Renderer* GetRenderer();
 private:
 	SDL_Window* m_pxWindow = nullptr;

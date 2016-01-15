@@ -1,7 +1,9 @@
 #pragma once
 
 #include "IEntity.h"
+#include "Sprite.h"
 class InputManager;
+
 
 class Player : public IEntity
 {
@@ -14,6 +16,9 @@ public:
 	float GetX();
 	float GetY();
 	bool IsVisible();
+	int GetSpeedX();
+	int GetSpeedY();
+	void SetPosition(float p_fX, float p_fY);
 	EENTITYTYPE GetType();
 
 private:

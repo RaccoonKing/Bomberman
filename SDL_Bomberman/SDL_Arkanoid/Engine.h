@@ -4,7 +4,6 @@ class DrawManager;
 class SpriteManager;
 class StateManager;
 class InputManager;
-class Keyboard;
 
 class Engine
 {
